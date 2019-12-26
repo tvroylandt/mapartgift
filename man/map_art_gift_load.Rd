@@ -9,7 +9,8 @@ map_art_gift_load(
   name_place,
   crs = 3785,
   dist_shape = 3,
-  shape = "circle"
+  shape = "circle",
+  building = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ map_art_gift_load(
 \item{dist_shape}{The distance to plot around the plot}
 
 \item{shape}{The shape, circle or square, default to circle}
+
+\item{building}{Include the building layer}
 }
 \value{
 The loaded shp in the GlobalEnv

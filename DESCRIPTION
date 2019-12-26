@@ -17,6 +17,5 @@ Imports:
   ggplot2,
   magrittr,
   units,
-  stringr
-Suggests:
-  tidyverse
+  stringr,
+  forcats

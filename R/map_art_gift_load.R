@@ -5,6 +5,7 @@
 #' @param crs The EPSG CRS, default to Mercator (3785)
 #' @param dist_shape The distance to plot around the plot
 #' @param shape The shape, circle or square, default to circle
+#' @param building Include the building layer
 #'
 #' @return The loaded shp in the GlobalEnv
 #'
@@ -12,6 +13,7 @@
 #' @import dplyr
 #' @import stringr
 #' @import units
+#' @import forcats
 #' @importFrom magrittr %>%
 #'
 #' @export
@@ -22,7 +24,8 @@ map_art_gift_load <-
            name_place,
            crs = 3785,
            dist_shape = 3,
-           shape = "circle") {
+           shape = "circle",
+           building = FALSE) {
     # OSM layer import
     places_import <-
       read_sf(paste0("maps/shapefiles/", region, "/gis_osm_places_free_1.shp")) %>%
@@ -48,13 +51,15 @@ map_art_gift_load <-
       )) %>%
       st_transform(crs = crs)
 
-    building_import <-
-      read_sf(paste0(
-        "maps/shapefiles/",
-        region,
-        "/gis_osm_buildings_a_free_1.shp"
-      )) %>%
-      st_transform(crs = crs)
+    if (building == TRUE) {
+      building_import <-
+        read_sf(paste0(
+          "maps/shapefiles/",
+          region,
+          "/gis_osm_buildings_a_free_1.shp"
+        )) %>%
+        st_transform(crs = crs)
+    }
 
     # Setting the place
     place_right <- places_import %>%
@@ -71,14 +76,20 @@ map_art_gift_load <-
         st_buffer(dist = units::set_units(dist_shape, "km"))
     }
 
+    # Export place_shape
+    place_shape <<- place_shape
+
     # Crop the layers
     roads_cropped <- st_intersection(roads_import, place_shape)
     water_cropped <<- st_intersection(water_import, place_shape)
     railways_cropped <<-
       st_intersection(railways_import, place_shape)
     landuse_cropped <- st_intersection(landuse_import, place_shape)
-    building_cropped <<-
-      st_intersection(building_import, place_shape)
+
+    if (building == TRUE) {
+      building_cropped <<-
+        st_intersection(building_import, place_shape)
+    }
 
     # Clean roads
     roads_cleaned <<- roads_cropped %>%

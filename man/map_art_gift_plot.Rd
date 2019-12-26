@@ -10,12 +10,13 @@ map_art_gift_plot(
   size_caption = 120,
   width_out = 297,
   height_out = 420,
-  place_shape = place_shape,
-  roads = roads_cleaned,
-  water = water_cropped,
-  railways = railways_cropped,
-  forest = forest,
-  building = building_cropped
+  place_shape_shp = place_shape,
+  roads_shp = roads_cleaned,
+  water_shp = water_cropped,
+  railways_shp = railways_cropped,
+  forest_shp = forest,
+  building = FALSE,
+  building_shp
 )
 }
 \arguments{
@@ -29,17 +30,19 @@ map_art_gift_plot(
 
 \item{height_out}{Output height in mm}
 
-\item{place_shape}{The shp of the place, default in GlobalEnv}
+\item{place_shape_shp}{The shp of the place, default in GlobalEnv}
 
-\item{roads}{The shp of the roads, default in GlobalEnv}
+\item{roads_shp}{The shp of the roads, default in GlobalEnv}
 
-\item{water}{The shp of the water, default in GlobalEnv}
+\item{water_shp}{The shp of the water, default in GlobalEnv}
 
-\item{railways}{The shp of the railways, default in GlobalEnv}
+\item{railways_shp}{The shp of the railways, default in GlobalEnv}
 
-\item{forest}{The shp of the forest, default in GlobalEnv}
+\item{forest_shp}{The shp of the forest, default in GlobalEnv}
 
-\item{building}{The shp of the building, default in GlobalEnv}
+\item{building}{Include the building layer}
+
+\item{building_shp}{The shp of the building, default in GlobalEnv}
 }
 \value{
 A saved plot in maps/output

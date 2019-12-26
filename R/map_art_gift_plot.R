@@ -5,12 +5,13 @@
 #' @param size_caption The size of the caption
 #' @param width_out Output width in mm
 #' @param height_out Output height in mm
-#' @param place_shape The shp of the place, default in GlobalEnv
-#' @param roads The shp of the roads, default in GlobalEnv
-#' @param water The shp of the water, default in GlobalEnv
-#' @param railways The shp of the railways, default in GlobalEnv
-#' @param forest The shp of the forest, default in GlobalEnv
-#' @param building The shp of the building, default in GlobalEnv
+#' @param place_shape_shp The shp of the place, default in GlobalEnv
+#' @param roads_shp The shp of the roads, default in GlobalEnv
+#' @param water_shp The shp of the water, default in GlobalEnv
+#' @param railways_shp The shp of the railways, default in GlobalEnv
+#' @param forest_shp The shp of the forest, default in GlobalEnv
+#' @param building_shp The shp of the building, default in GlobalEnv
+#' @param building Include the building layer
 #'
 #' @return A saved plot in maps/output
 #'
@@ -26,39 +27,49 @@ map_art_gift_plot <- function(region,
                               size_caption = 120,
                               width_out = 297,
                               height_out = 420,
-                              place_shape = place_shape,
-                              roads = roads_cleaned,
-                              water = water_cropped,
-                              railways = railways_cropped,
-                              forest = forest,
-                              building = building_cropped) {
+                              place_shape_shp = place_shape,
+                              roads_shp = roads_cleaned,
+                              water_shp = water_cropped,
+                              railways_shp = railways_cropped,
+                              forest_shp = forest,
+                              building = FALSE,
+                              building_shp) {
   # plot the map
-  ggplot() +
+  map1 <- ggplot() +
     geom_sf(
-      data = forest,
+      data = forest_shp,
       fill = "#228b22",
       size = 0.01,
       alpha = 0.4
     ) +
-    geom_sf(data = water,
+    geom_sf(data = water_shp,
             fill = "#9cd0d4",
-            size = 0.01) +
-    geom_sf(data = building,
-            fill = "grey60",
-            size = 0.1) +
-    geom_sf(data = railways, col = "grey60", size = 0.2) +
+            size = 0.01)
+
+  # building or not
+  if (building == TRUE) {
+    map2 <- map1 +
+      geom_sf(data = building_shp,
+              fill = "grey60",
+              size = 0.1)
+  } else {
+    map2 <- map1
+  }
+
+  map2 +
+    geom_sf(data = railways_shp, col = "grey60", size = 0.2) +
     geom_sf(
-      data = roads %>% filter(.data$newclass == "other"),
+      data = roads_shp %>% filter(.data$newclass == "other"),
       color = "grey50",
       size = 0.15
     ) +
     geom_sf(
-      data = roads %>% filter(.data$newclass != "other"),
+      data = roads_shp %>% filter(.data$newclass != "other"),
       color = "grey40",
       size = 0.25
     ) +
     geom_sf(
-      data = place_shape,
+      data = place_shape_shp,
       alpha = 0,
       color = "grey60",
       size = 1.5
