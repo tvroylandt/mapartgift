@@ -1,0 +1,5 @@
+^mapartgift\.Rproj$
+^\.Rproj\.user$
+^\inst\shapefiles
+^\inst\output
+^README\.Rmd$
