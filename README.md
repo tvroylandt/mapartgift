@@ -141,3 +141,5 @@ map_assemble <- image_append(image = c(map_assemble1, map_assemble2), stack = TR
 
 image_write(map_assemble, "maps/output/assemble.png")
 ```
+
+<img src="man/figures/README-exemple2-1.png" width="100%" />

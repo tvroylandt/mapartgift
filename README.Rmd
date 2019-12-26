@@ -144,7 +144,11 @@ image_write(map_assemble, "maps/output/assemble.png")
 ```
 
 
+```{r exemple2, echo=FALSE}
+map_asseemble <- image_read("maps/output/assemble.png")
 
+map_asseemble
+```
 
 
 
