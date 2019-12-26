@@ -45,50 +45,49 @@ After that you can make some maps. Just be careful with the CRS.
 
 ```{r packages}
 library(mapartgift)
+library(magick)
+library(tidyverse)
 ```
 
 ## Family
 
-```{r family}
-
-
+```{r family, eval = FALSE}
 # Chantilly
-# map_art_gift_load(
-#   region = "picardie",
-#   name_place = "Chantilly",
-#   crs = 2154,
-#   dist_shape = 3,
-#   building = TRUE
-# )
-# map_art_gift_plot(
-#   region = "picardie",
-#   name_place = "Chantilly",
-#   building = TRUE,
-#   building_shp = building_cropped
-# )
+map_art_gift_load(
+  region = "picardie",
+  name_place = "Chantilly",
+  crs = 2154,
+  dist_shape = 3,
+  building = TRUE
+)
+map_art_gift_plot(
+  region = "picardie",
+  name_place = "Chantilly",
+  building = TRUE,
+  building_shp = building_cropped
+)
 
 # Saint-Rimault
-# map_art_gift_load(
-#   region = "picardie",
-#   name_place = "Saint-Rimault",
-#   crs = 2154,
-#   dist_shape = 2,
-#   building = TRUE
-# )
-# map_art_gift_plot(
-#   region = "picardie",
-#   name_place = "Saint-Rimault",
-#   building = TRUE,
-#   building_shp = building_cropped
-# )
+map_art_gift_load(
+  region = "picardie",
+  name_place = "Saint-Rimault",
+  crs = 2154,
+  dist_shape = 2,
+  building = TRUE
+)
+map_art_gift_plot(
+  region = "picardie",
+  name_place = "Saint-Rimault",
+  building = TRUE,
+  building_shp = building_cropped
+)
 
 # Lille
 map_art_gift_load(
   region = "nord-pas-de-calais",
   name_place = "Lille",
   crs = 2154,
-  dist_shape = 5,
-  building = FALSE
+  dist_shape = 4
 )
 map_art_gift_plot(region = "nord-pas-de-calais", name_place = "Lille")
 
@@ -97,7 +96,7 @@ map_art_gift_load(
   region = "ile-de-france",
   name_place = "Paris",
   crs = 2154,
-  dist_shape = 5
+  dist_shape = 7
 )
 map_art_gift_plot(region = "ile-de-france", name_place = "Paris")
 
@@ -113,16 +112,27 @@ map_art_gift_plot(region = "illinois", name_place = "Evanston")
 # Bruxelles
 map_art_gift_load(
   region = "belgium",
-  name_place = "Bruxelles - Brussel",
+  name_place = "Bruxelles",
   crs = 3812,
   dist_shape = 5
 )
-map_art_gift_plot(region = "belgium", name_place = "Bruxelles - Brussel")
+map_art_gift_plot(region = "belgium", name_place = "Bruxelles")
 ```
 
+## Assemble the maps
 
-```{r assembly}
-# library(magick)
+```{r assembly, eval = FALSE}
+map_chantilly <- image_read("maps/output/picardie_Chantilly_297_420.png")
+map_lille <- image_read("maps/output/nord-pas-de-calais_Lille_297_420.png")
+map_evanston <- image_read("maps/output/illinois_Evanston_297_420.png")
+map_bruxelles <- image_read("maps/output/belgium_Bruxelles_297_420.png")
+
+map_assemble1 <- image_append(image = c(map_evanston, map_chantilly))
+map_assemble2 <- image_append(image = c(map_bruxelles, map_lille)) 
+
+map_assemble <- image_append(image = c(map_assemble1, map_assemble2), stack = TRUE)
+
+image_write(map_assemble, "maps/output/assemble.png")
 
 ```
 
