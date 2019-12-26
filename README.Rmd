@@ -33,6 +33,61 @@ The package contains two functions :
 + one to load the data ;
 + one to plot the map.
 
-```{r example}
-# library(mapartgift)
+The fist step is to download the shapefiles into maps/shapefiles/region_name which can be done with the following chunk :
+
+```{r download}
+# url <- "http://download.geofabrik.de/europe/france/picardie-latest-free.shp.zip"
+# curl::curl_download(url, destfile = "picardie.shp.zip")
+# unzip("picardie.shp.zip", exdir = "inst/shapefiles/picardie")
 ```
+
+After that you can make some maps. Just be careful with the CRS.
+
+```{r packages}
+library(mapartgift)
+library(tidyverse)
+```
+
+## Family
+
+```{r family}
+# Chantilly
+
+# map_art_gift_load(region = "picardie", name_place = "Chantilly", crs = 2154)
+# map_art_gift_plot(region = "picardie", name_place = "Chantilly")
+
+# Saint-Rimault
+
+
+# Lille
+
+# Evanston
+
+# Bruxelles
+```
+
+
+```{r assembly}
+# library(magick)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

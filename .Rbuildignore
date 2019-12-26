@@ -1,5 +1,12 @@
 ^mapartgift\.Rproj$
 ^\.Rproj\.user$
-^\inst\shapefiles
-^\inst\output
 ^README\.Rmd$
+^maps$
+^LICENSE\.md$
+^maps/shapefiles$
+^maps/output$
+^.*\.png
+^.*\.dbf
+^.*\.shp
+^.*\.cpg
+^.*\.shx
