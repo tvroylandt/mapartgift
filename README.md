@@ -122,6 +122,51 @@ map_art_gift_load(
   dist_shape = 5
 )
 map_art_gift_plot(region = "belgium", name_place = "Bruxelles")
+
+# Laigneville
+map_art_gift_load(
+  region = "picardie",
+  name_place = "Laigneville",
+  crs = 2154,
+  dist_shape = 2,
+  building = TRUE
+)
+map_art_gift_plot(
+  region = "picardie",
+  name_place = "Laigneville",
+  building = TRUE,
+  building_shp = building_cropped
+)
+
+# Pontpoint
+map_art_gift_load(
+  region = "picardie",
+  name_place = "Pontpoint",
+  crs = 2154,
+  dist_shape = 4,
+  building = TRUE
+)
+map_art_gift_plot(
+  region = "picardie",
+  name_place = "Pontpoint",
+  building = TRUE,
+  building_shp = building_cropped
+)
+
+# Verneuil-en-Halatte
+map_art_gift_load(
+  region = "picardie",
+  name_place = "Verneuil",
+  crs = 2154,
+  dist_shape = 1.5,
+  building = TRUE
+)
+map_art_gift_plot(
+  region = "picardie",
+  name_place = "Verneuil",
+  building = TRUE,
+  building_shp = building_cropped
+)
 ```
 
 <img src="man/figures/README-exemple-1.png" width="100%" />
@@ -129,6 +174,7 @@ map_art_gift_plot(region = "belgium", name_place = "Bruxelles")
 ## Assemble the maps
 
 ``` r
+# Maman
 map_chantilly <- image_read("maps/output/picardie_Chantilly_297_420.png")
 map_lille <- image_read("maps/output/nord-pas-de-calais_Lille_297_420.png")
 map_evanston <- image_read("maps/output/illinois_Evanston_297_420.png")
@@ -137,9 +183,25 @@ map_bruxelles <- image_read("maps/output/belgium_Bruxelles_297_420.png")
 map_assemble1 <- image_append(image = c(map_evanston, map_chantilly))
 map_assemble2 <- image_append(image = c(map_bruxelles, map_lille)) 
 
-map_assemble <- image_append(image = c(map_assemble1, map_assemble2), stack = TRUE)
+map_assemble_maman <- image_append(image = c(map_assemble1, map_assemble2), stack = TRUE)
 
-image_write(map_assemble, "maps/output/assemble.png")
+image_write(map_assemble_maman, "maps/output/assemble_maman.png")
+
+# Christine
+map_chantilly <- image_read("maps/output/picardie_Chantilly_297_420.png")
+map_verneuil <- image_read("maps/output/picardie_Verneuil_297_420.png")
+map_laigneville <- image_read("maps/output/picardie_Laigneville_297_420.png")
+map_pontpoint <- image_read("maps/output/picardie_Pontpoint_297_420.png")
+
+map_assemble3 <- image_append(image = c(map_verneuil, map_pontpoint))
+map_assemble4 <- image_append(image = c(map_laigneville, map_chantilly)) 
+map_assemble_kiki <- image_append(image = c(map_assemble3, map_assemble4), stack = TRUE)
+
+image_write(map_assemble_kiki, "maps/output/assemble_kiki.png")
+
+# Celine
+map_assemble_celine <- image_append(image = c(map_verneuil, map_laigneville)) 
+image_write(map_assemble_celine, "maps/output/assemble_celine.png")
 ```
 
 <img src="man/figures/README-exemple2-1.png" width="100%" />
