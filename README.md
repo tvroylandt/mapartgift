@@ -124,6 +124,8 @@ map_art_gift_load(
 map_art_gift_plot(region = "belgium", name_place = "Bruxelles")
 ```
 
+<img src="man/figures/README-exemple-1.png" width="100%" />
+
 ## Assemble the maps
 
 ``` r

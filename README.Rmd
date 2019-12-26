@@ -119,6 +119,13 @@ map_art_gift_load(
 map_art_gift_plot(region = "belgium", name_place = "Bruxelles")
 ```
 
+```{r exemple, echo=FALSE}
+map_chantilly <- image_read("maps/output/picardie_Chantilly_297_420.png")
+
+map_chantilly
+```
+
+
 ## Assemble the maps
 
 ```{r assembly, eval = FALSE}
