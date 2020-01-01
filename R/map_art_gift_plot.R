@@ -8,10 +8,13 @@
 #' @param place_shape_shp The shp of the place, default in GlobalEnv
 #' @param roads_shp The shp of the roads, default in GlobalEnv
 #' @param water_shp The shp of the water, default in GlobalEnv
+#' @param waterways_shp The shp of the waterways, default in GlobalEnv
 #' @param railways_shp The shp of the railways, default in GlobalEnv
 #' @param forest_shp The shp of the forest, default in GlobalEnv
-#' @param building_shp The shp of the building, default in GlobalEnv
+#' @param building_shp The shp of the building, no default
 #' @param building Include the building layer
+#' @param castle_shp The shp of the castles, no default
+#' @param castle Include the castles
 #'
 #' @return A saved plot in maps/output
 #'
@@ -30,10 +33,13 @@ map_art_gift_plot <- function(region,
                               place_shape_shp = place_shape,
                               roads_shp = roads_cleaned,
                               water_shp = water_cropped,
+                              waterways_shp = waterways_cropped,
                               railways_shp = railways_cropped,
                               forest_shp = forest,
                               building = FALSE,
-                              building_shp) {
+                              building_shp,
+                              castle = FALSE,
+                              castle_shp) {
   # plot the map
   map1 <- ggplot() +
     geom_sf(
@@ -44,7 +50,11 @@ map_art_gift_plot <- function(region,
     ) +
     geom_sf(data = water_shp,
             fill = "#9cd0d4",
-            size = 0.01)
+            color = "#9cd0d4",
+            size = 0.01) +
+    geom_sf(data = waterways_shp,
+            color = "#9cd0d4",
+            size = 0.5)
 
   # building or not
   if (building == TRUE) {
@@ -56,7 +66,16 @@ map_art_gift_plot <- function(region,
     map2 <- map1
   }
 
-  map2 +
+  if (castle == TRUE) {
+    map3 <- map2 +
+      geom_sf(data = castle_shp,
+              fill = "grey80",
+              size = 0.2)
+  } else {
+    map3 <- map2
+  }
+
+  map3 +
     geom_sf(data = railways_shp, col = "grey60", size = 0.2) +
     geom_sf(
       data = roads_shp %>% filter(.data$newclass == "other"),

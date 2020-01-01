@@ -6,6 +6,7 @@
 #' @param dist_shape The distance to plot around the plot
 #' @param shape The shape, circle or square, default to circle
 #' @param building Include the building layer
+#' @param castle Include the castles
 #'
 #' @return The loaded shp in the GlobalEnv
 #'
@@ -25,7 +26,8 @@ map_art_gift_load <-
            crs = 3785,
            dist_shape = 3,
            shape = "circle",
-           building = FALSE) {
+           building = FALSE,
+           castle = FALSE) {
     # OSM layer import
     places_import <-
       read_sf(paste0("maps/shapefiles/", region, "/gis_osm_places_free_1.shp")) %>%
@@ -37,6 +39,10 @@ map_art_gift_load <-
 
     water_import <-
       read_sf(paste0("maps/shapefiles/", region, "/gis_osm_water_a_free_1.shp")) %>%
+      st_transform(crs = crs)
+
+    waterways_import <-
+      read_sf(paste0("maps/shapefiles/", region, "/gis_osm_waterways_free_1.shp")) %>%
       st_transform(crs = crs)
 
     railways_import <-
@@ -61,6 +67,17 @@ map_art_gift_load <-
         st_transform(crs = crs)
     }
 
+    if (castle == TRUE) {
+      castle_import <-
+        read_sf(paste0(
+          "maps/shapefiles/",
+          region,
+          "/gis_osm_pois_a_free_1.shp"
+        )) %>%
+        filter(fclass == "castle") %>%
+        st_transform(crs = crs)
+    }
+
     # Setting the place
     place_right <- places_import %>%
       filter(.data$name == name_place)
@@ -82,6 +99,7 @@ map_art_gift_load <-
     # Crop the layers
     roads_cropped <- st_intersection(roads_import, place_shape)
     water_cropped <<- st_intersection(water_import, place_shape)
+    waterways_cropped <<- st_intersection(waterways_import, place_shape)
     railways_cropped <<-
       st_intersection(railways_import, place_shape)
     landuse_cropped <- st_intersection(landuse_import, place_shape)
@@ -89,6 +107,11 @@ map_art_gift_load <-
     if (building == TRUE) {
       building_cropped <<-
         st_intersection(building_import, place_shape)
+    }
+
+    if (castle == TRUE) {
+      castle_cropped <<-
+        st_intersection(castle_import, place_shape)
     }
 
     # Clean roads

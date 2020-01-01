@@ -49,9 +49,11 @@ library(magick)
 library(tidyverse)
 ```
 
-## Family
+# Family
 
-```{r family, eval = FALSE}
+## Maps
+
+```{r family_maps, eval = FALSE}
 # Chantilly
 map_art_gift_load(
   region = "picardie",
@@ -165,14 +167,14 @@ map_art_gift_plot(
 ```
 
 ```{r exemple, echo=FALSE}
-map_chantilly <- image_read("maps/output/picardie_Chantilly_297_420.png")
+map_chantilly <- image_read("maps/output/family/picardie_Chantilly_297_420.png")
 
 map_chantilly
 ```
 
 ## Assemble the maps
 
-```{r assembly, eval = FALSE}
+```{r family_assembly, eval = FALSE}
 # Maman
 map_chantilly <- image_read("maps/output/picardie_Chantilly_297_420.png")
 map_lille <- image_read("maps/output/nord-pas-de-calais_Lille_297_420.png")
@@ -204,8 +206,50 @@ image_write(map_assemble_celine, "maps/output/assemble_celine.png")
 ```
 
 ```{r exemple2, echo=FALSE}
-map_assemble <- image_read("maps/output/assemble_maman.png")
+map_assemble <- image_read("maps/output/family/assemble_maman.png")
 
 map_assemble
 ```
 
+# Colleagues
+
+## Maps
+
+```{r colleagues_maps, eval = FALSE}
+# Montreuil
+map_art_gift_load(
+  region = "ile-de-france",
+  name_place = "Montreuil",
+  crs = 2154,
+  dist_shape = 5
+)
+map_art_gift_plot(region = "ile-de-france", name_place = "Montreuil")
+
+# Les Lilas
+map_art_gift_load(
+  region = "ile-de-france",
+  name_place = "Les Lilas",
+  crs = 2154,
+  dist_shape = 5
+)
+map_art_gift_plot(region = "ile-de-france", name_place = "Les Lilas")
+
+# Villejuif
+map_art_gift_load(
+  region = "ile-de-france",
+  name_place = "Villejuif",
+  crs = 2154,
+  dist_shape = 7
+)
+map_art_gift_plot(region = "ile-de-france", name_place = "Villejuif")
+
+# Stains
+map_art_gift_load(
+  region = "ile-de-france",
+  name_place = "Stains",
+  crs = 2154,
+  dist_shape = 7
+)
+map_art_gift_plot(region = "ile-de-france", name_place = "Stains")
+
+```

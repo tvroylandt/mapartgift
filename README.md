@@ -44,17 +44,19 @@ library(magick)
 #> Enabled features: fontconfig, freetype, fftw, lcms, pango, x11
 #> Disabled features: cairo, ghostscript, rsvg, webp
 library(tidyverse)
-#> ── Attaching packages ───────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+#> ── Attaching packages ───────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
 #> ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
 #> ✓ tibble  2.1.3     ✓ dplyr   0.8.3
 #> ✓ tidyr   1.0.0     ✓ stringr 1.4.0
 #> ✓ readr   1.3.1     ✓ forcats 0.4.0
-#> ── Conflicts ──────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+#> ── Conflicts ──────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
 ```
 
-## Family
+# Family
+
+## Maps
 
 ``` r
 # Chantilly
@@ -205,3 +207,45 @@ image_write(map_assemble_celine, "maps/output/assemble_celine.png")
 ```
 
 <img src="man/figures/README-exemple2-1.png" width="100%" />
+
+# Colleagues
+
+## Maps
+
+``` r
+# Montreuil
+map_art_gift_load(
+  region = "ile-de-france",
+  name_place = "Montreuil",
+  crs = 2154,
+  dist_shape = 5
+)
+map_art_gift_plot(region = "ile-de-france", name_place = "Montreuil")
+
+# Les Lilas
+map_art_gift_load(
+  region = "ile-de-france",
+  name_place = "Les Lilas",
+  crs = 2154,
+  dist_shape = 5
+)
+map_art_gift_plot(region = "ile-de-france", name_place = "Les Lilas")
+
+# Villejuif
+map_art_gift_load(
+  region = "ile-de-france",
+  name_place = "Villejuif",
+  crs = 2154,
+  dist_shape = 7
+)
+map_art_gift_plot(region = "ile-de-france", name_place = "Villejuif")
+
+# Stains
+map_art_gift_load(
+  region = "ile-de-france",
+  name_place = "Stains",
+  crs = 2154,
+  dist_shape = 7
+)
+map_art_gift_plot(region = "ile-de-france", name_place = "Stains")
+```
