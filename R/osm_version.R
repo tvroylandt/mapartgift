@@ -64,7 +64,8 @@ get_osm_cropped_data <- function(location, radius) {
   # bbox corner
   bb_corner_x <-
     sf_square_buffer$xmin + (radius * 0.0000003) * x_sign
-  bb_corner_y <- sf_square_buffer$ymin + (radius * 0.000001) * y_sign
+  bb_corner_y <-
+    sf_square_buffer$ymin + (radius * 0.000001) * y_sign
 
   # return
   list(
@@ -114,7 +115,7 @@ create_map_with_coords <-
     p <- ggplot() +
       geom_sf(data = sf_osm_list$lines,
               color = sec_col,
-              linewidth = .1) +
+              linewidth = .2) +
       annotate(
         geom = "shadowtext",
         x = sf_osm_list$bbox_corner_x,
