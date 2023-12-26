@@ -49,9 +49,22 @@ get_osm_cropped_data <- function(location, radius) {
   # crop
   sf_osm_lines_cropped <- st_crop(sf_osm_lines, sf_square_buffer)
 
+  # sign of corner
+  if (sf_square_buffer$xmin > 0) {
+    x_sign <- 1
+  } else{
+    x_sign <- -1
+  }
+  if (sf_square_buffer$ymin > 0) {
+    y_sign <- 1
+  } else{
+    y_sign <- -1
+  }
+
   # bbox corner
-  bb_corner_x <- sf_square_buffer$xmin
-  bb_corner_y <- sf_square_buffer$ymin + (radius * 0.000001)
+  bb_corner_x <-
+    sf_square_buffer$xmin + (radius * 0.0000003) * x_sign
+  bb_corner_y <- sf_square_buffer$ymin + (radius * 0.000001) * y_sign
 
   # return
   list(
