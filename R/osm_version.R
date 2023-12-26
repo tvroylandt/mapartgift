@@ -158,5 +158,3 @@ wrap_coords_map <- function(location, radius, dir_export_path) {
     filename = glue::glue("{location}.png")
   )
 }
-
-wrap_coords_map("chantilly", 5000, "outputs")

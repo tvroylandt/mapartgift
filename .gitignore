@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 \maps
+outputs/
+R/render_osm_version.R
